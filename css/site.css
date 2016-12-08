@@ -1,0 +1,181 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 17, 2014, 11:04:25 AM
+    Author     : Johnathan
+*/
+
+root{
+    display:block;
+}
+
+#header{
+    color: #0000FF;
+    font-size: 200%
+}
+
+.odd{
+    background-color: #C0C0C0;
+}
+
+.even{
+    background-color: #FFFFFF;
+   
+}
+
+.tbl_header{
+    background-color: #AAAAEE;
+}
+
+.back{
+	opacity:0.6;
+}
+
+.colmask{
+   position: relative;
+   overflow: hidden;
+   margin: 0px;
+   padding:10px;
+   background-color: #b4d2f7;
+   border-radius: 25px;
+   border: 2px solid #000;
+}
+.colmask-2{
+   position: relative;
+   overflow: hidden;
+   margin: 0px;
+   padding:10px;
+   background-color: #b4d2f7;
+   border-radius: 25px;
+   border: 2px solid #000;
+}
+.header{
+   float: left;
+   width: 100%;
+   background-color: #f4f4f4;
+}
+.colmid{
+   position: relative;
+   width: 100%;
+   right: 27%;
+   background-color: #b4d2f7;
+}
+.colleft{
+   position: relative;
+   width: 100%;
+   right: 31%;
+   background-color: #b4d2f7;
+}
+.col1{
+   position: relative;
+   overflow: hidden;
+   float: left;
+   width: 30.7%;
+   left: 100.15%;
+   background-color: #99ccff;
+   border-radius: 5px 5px 5px 5px;
+}
+.col2{
+   position: relative;
+   overflow: hidden;
+   float: left;
+   width: 41.7%;
+   left: 27.450000000000003%;
+   background-color: #99ccff;
+   border-radius: 20px 5px 5px 20px;
+}
+.col3{
+   position: relative;
+   overflow: hidden;
+   float: left;
+   width: 26.7%;
+   left: 58.75000000000001%;
+   background-color: #99ccff;
+   border-radius: 5px 20px 20px 5px;
+}
+.footer{
+   float: left;
+   width: 100%;
+   background-color: #b4caf7;
+}
+body {
+   padding: 0px;
+   margin: 0px;
+   font-size: 90%;
+   background-color: #e7e7de;
+}
+
+.col1 input{   
+   width: 96%;   
+}
+
+.col3 input{   
+   width: 96%;   
+}
+
+fieldset {
+   padding: 10px;   
+   border-style: none;
+}
+
+.item-list input[type="text"]{
+	width: 25%;
+}
+
+.item-list label{
+	width:auto;
+}
+
+.item-list input[type="checkbox"] {
+	
+}
+#item-list  {
+	width: 100%;
+}
+
+#add-item {
+	padding: 10px;
+	width: 250px;
+	height: 300px;
+	background-color: #99ccff;
+	border-radius: 25px;
+	border: 2px solid #000;
+}
+#close{
+	float: right; 
+	border-radius: 12px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    
+}
+#close:hover {
+    background-color: #f44336; 
+    color: white;
+}
+
+/*table { border-collapse: collapse; empty-cells: show; }*/
+
+td { position: relative; }
+
+tr.strikeout td:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-bottom: 1px solid #111;
+  width: 100%;
+  
+}
+
+tr.strikeout td:after {
+  content: "\00B7";
+  font-size: 1px;
+  opacity: 0.5;
+}
+
+/* Extra styling */
+td { width: 100px; }
+th { text-align: left; }
