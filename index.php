@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 include 'opendb.php';
+include 'link.php';
 include 'header.html';
 
 ?>
