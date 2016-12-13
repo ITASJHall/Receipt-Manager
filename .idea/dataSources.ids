@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - receipt@192.168.0.21" uuid="48cef342-ea9e-4cce-bb5a-c3cbcf47e9fb">
+    <database-info product="MySQL" version="5.7.9" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="receipt"/>
+    <table name="_items" schema="" catalog="receipt" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="number_purchased" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="spent_total" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <column name="cost_avg" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <column name="frequency" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <column name="timestamp_updated" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="timestamp_created" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="_items_purchased_ibfk_2" table="_items_purchased" schema="" catalog="receipt" columns="item_id"/>
+    </table>
+    <table name="_items_purchased" schema="" catalog="receipt" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="receipt_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cost_per_unit" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="category" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="size" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="size_unit" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="amount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="savings" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="item_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="brand" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="time_stamp_purchased" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="time_stamp_updated" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="time_stamp_created" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="_items_purchased_ibfk_1" columns="receipt_id" ref-table="_receipts" ref-schema="" ref-catalog="receipt" ref-columns="id" update-rule="0" delete-rule="3" deferrability="2"/>
+      <foreign-key name="_items_purchased_ibfk_2" columns="item_id" ref-table="_items" ref-schema="" ref-catalog="receipt" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="_receipts" schema="" catalog="receipt" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="location" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="num_items" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cost" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="cost_before_tax" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="pst" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="gst" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="method_of_payment" sqlType="ENUM" precision="7" scale="0" nullable="true" jdbcType="1"/>
+      <column name="time_purchased" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="points_spent" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="points_earned" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="savings_total" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cashier" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="purchaser" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="time_stamp_updated" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="time_stamp_created" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="_items_purchased_ibfk_1" table="_items_purchased" schema="" catalog="receipt" columns="receipt_id"/>
+    </table>
+  </data-source>
+</component>
