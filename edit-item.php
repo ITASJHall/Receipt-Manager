@@ -93,6 +93,8 @@ if (isset($_POST['edit'])) {
             $item_query .= "WHERE `id` = " . $item['id'] . ";";
             if (mysqli_query($conn, $item_query)) {
                 $successes[] = "Item-" . $id . " Deleted Successfully";
+				header("Location: {$link_url}/");
+				exit;
 
             } else {
                 $errors[] = "Error Deleting Item-" . $id . ": " . mysqli_error($conn);

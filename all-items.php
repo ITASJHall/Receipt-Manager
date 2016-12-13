@@ -10,7 +10,7 @@ $query = "SELECT ";
 $query .= "`_items_purchased`.`id`,`_items`.`name`, `_items_purchased`.`cost_per_unit` as `price`, CONCAT(`_items_purchased`.`size`, `_items_purchased`.`size_unit`) as `size`, `_items_purchased`.`category`, `_items_purchased`.`type`, `_items_purchased`.`amount`, `_items_purchased`.`savings`, `_items_purchased`.`brand`, `_items_purchased`.`time_stamp_purchased`, `_items_purchased`.`time_stamp_created` ";
 $query .= "FROM `_items_purchased` INNER JOIN ";
 $query .= "`_items` ON `_items_purchased`.`item_id` = `_items`.`id` ";
-$query .= ($today) ? "WHERE date(`_items_purchased`.`time_stamp_created`) = date(NOW())" : '';
+$query .= ($today) ? "WHERE date(`_items_purchased`.`time_stamp_purchased`) = date(NOW())" : '';
 $result = mysqli_query($conn, $query);
 
 $rows = array();

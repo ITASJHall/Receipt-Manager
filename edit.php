@@ -2,6 +2,7 @@
 include 'header.html';
 include 'config.php';
 include 'opendb.php';
+include 'link.php';
 
 $successes = array();
 $errors = array();
@@ -93,7 +94,7 @@ if (isset($_POST['edit'])) {
 
 		if (mysqli_query($conn, $query)) {
 			$successes[] = "Receipt Deleted";
-			header("Location: http://{$_SERVER['HTTP_HOST']}");
+			header("Location: {$link_url}/");
 			exit;
 
 		} else {

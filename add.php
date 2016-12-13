@@ -69,7 +69,8 @@ include 'header.html';
      $query = "INSERT INTO `_receipts` SET ";
      $query .= (!empty($location)? 			"`location` = '" 			.  $conn->real_escape_string(htmlentities($location)) . "', " : ""); 
      $query .= (!empty($receipt_type)? 		"`type` = '" 				.  $conn->real_escape_string(htmlentities($receipt_type)) . "', " : ""); 
-     $query .= (!empty($cost)? 				"`cost` = '" 				.  $conn->real_escape_string(htmlentities($cost)) . "', " : ""); 
+     $query .= (!empty($items_id)? 			"`num_items` = '" 			.  $conn->real_escape_string(count($items_id)) . "', " : "");
+     $query .= (!empty($cost)? 				"`cost` = '" 				.  $conn->real_escape_string(htmlentities($cost)) . "', " : "");
      $query .= (!empty($cost_before_tax)? 	"`cost_before_tax` = '" 	.  $conn->real_escape_string(htmlentities($cost_before_tax)) . "', " : ""); 
      $query .= (!empty($pst)? 				"`pst` = '" 				.  $conn->real_escape_string(htmlentities($pst)) . "', " : ""); 
      $query .= (!empty($gst)? 				"`gst` = '" 				.  $conn->real_escape_string(htmlentities($gst)) . "', " : ""); 
@@ -212,8 +213,8 @@ include 'header.html';
 	   });
        function addItem(val){  
        		var item = "<tr><td><input type=\"checkbox\" name='"+val+"[]' value='"+val+"' checked><label>"+val+"</label>";
-	    		item += "<input style=\"margin-right: 19.5%; float:right;\" type=\"text\" name='"+val+"_type[]' placeholder=\"Type\">";
-	    		item += "<input style=\"float:right;\" type=\"text\" type=\"text\" name='"+val+"_cate[]' placeholder=\"Category\"></td></tr>";
+	    		item += "<input type=\"text\" name='"+val+"_type[]' placeholder=\"Type\">";
+	    		item += "<input type=\"text\" type=\"text\" name='"+val+"_cate[]' placeholder=\"Category\"></td></tr>";
 	    		item += "<tr><td><input type=\"text\" name='"+val+"_price[]' placeholder=\"Price\">";
 			    item += "<input type=\"text\" name='"+val+"_size[]' placeholder=\"Weight/Size\">";
 			    item += "<input type=\"text\" name='"+val+"_unit[]' placeholder=\"Unit\"></td></tr>";
@@ -228,8 +229,8 @@ include 'header.html';
       function addItems(val){  
        		for (var key in val){
        			var items = "<tr><td><input type=\"checkbox\" name='"+val[key]+"[]' value='"+val[key]+"' checked><label>"+val[key]+"</label>";
-       			    items += "<input style=\"margin-right: 19.5%; float:right;\" type=\"text\" name='"+val[key]+"_type[]' placeholder=\"Type\">";
-       			    items += "<input style=\"float:right;\" type=\"text\" name='"+val[key]+"_cate[]' placeholder=\"Category\"></td></tr>";
+       			    items += "<input type=\"text\" name='"+val[key]+"_type[]' placeholder=\"Type\">";
+       			    items += "<input type=\"text\" name='"+val[key]+"_cate[]' placeholder=\"Category\"></td></tr>";
 	        		items += "<tr><td><input type=\"text\" name='"+val[key]+"_price[]' placeholder=\"Price\">";
 				    items += "<input type=\"text\" name='"+val[key]+"_size[]' placeholder=\"Weight/Size\">";
 				    items += "<input type=\"text\" name='"+val[key]+"_unit[]' placeholder=\"Unit\"></td></tr>";
