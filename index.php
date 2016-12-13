@@ -8,7 +8,7 @@ include 'header.html';
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript"></script>
-<div class="colmask-2" style="margin-left: 5%; margin-right: 5%;">
+<div class="colmask-2">
 	<?php
 
 $result = mysqli_query($conn, "SELECT * FROM  `_receipts`");

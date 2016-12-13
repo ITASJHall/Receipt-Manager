@@ -56,6 +56,8 @@ if (isset($_POST['edit'])) {
 
 	$item_query = "UPDATE `_items_purchased` SET ";
 	$item_query .= !empty($_POST['price']) ?				   "`cost_per_unit` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['price'])) . "', " : '';
+	$item_query .= !empty($_POST['cate']) ?				   "`category` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['cate'])) . "', " : '';
+	$item_query .= !empty($_POST['type']) ?				   "`type` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['type'])) . "', " : '';
 	$item_query .= !empty($_POST['size']) ?				   "`size` = '" . 				  $conn -> real_escape_string(htmlentities($_POST['size'])) . "', " : '';
 	$item_query .= !empty($_POST['size_unit']) ?			   "`size_unit` = '" . 			  $conn -> real_escape_string(htmlentities($_POST['size_unit'])) . "', " : '';
 	$item_query .= !empty($_POST['amount']) ? 		  	   "`amount` = '" . 			  $conn -> real_escape_string(htmlentities($_POST['amount'])) . "', " : '';
@@ -114,7 +116,7 @@ if (!empty($entry_id)) {
 	$entrys = $result->fetch_assoc();
 	
 	$query = "SELECT ";
-	$query .= "`_items_purchased`.`id`,`_items_purchased`.`receipt_id`,`_items`.`name`, `_items_purchased`.`cost_per_unit` as `price`, `_items_purchased`.`size`, `_items_purchased`.`size_unit`, `_items_purchased`.`amount`, `_items_purchased`.`savings`, `_items_purchased`.`brand`, `_items_purchased`.`time_stamp_purchased` ";
+	$query .= "`_items_purchased`.`id`,`_items_purchased`.`receipt_id`,`_items`.`name`, `_items_purchased`.`cost_per_unit` as `price`, `_items_purchased`.`size`, `_items_purchased`.`category`, `_items_purchased`.`type`, `_items_purchased`.`size_unit`, `_items_purchased`.`amount`, `_items_purchased`.`savings`, `_items_purchased`.`brand`, `_items_purchased`.`time_stamp_purchased` ";
 	$query .= "FROM `_items_purchased` INNER JOIN ";
 	$query .= "`_items` ON `_items_purchased`.`item_id` = `_items`.`id` ";
 	$query .= "WHERE `_items_purchased`.`id` = " . $entry_id . ";";
@@ -149,7 +151,19 @@ if(!empty($item)) { ?>
 					<tr class="tbl_header">
 						<th>Item Name</th>
 						<th>Price</th>
+						<th>Category</th>
+						<th>Type</th>
 						<th>Size</th>
+					</tr>
+					<tr class="odd" data-i_id="<?=$item['id']; ?>">
+						<td><label></label><?=$item['name']; ?></label></td>
+						<td><input type="text" name="price" value="<?=$item['price']; ?>" placeholder="Price" style="width: 50%;"></td>
+						<td><input type="text" name="category" value="<?=$item['category']; ?>" placeholder="Category" style="width: 50%;"></td>
+						<td><input type="text" name="type" value="<?=$item['type']; ?>" placeholder="Type" style="width: 50%;"></td>
+						<td><input type="text" name="size" value="<?=$item['size']; ?>" placeholder="Size" style="width: 50%;">
+							<input type="text" name="size_unit" value="<?=$item['size_unit']; ?>" placeholder="Unit" style="width: 50%;"></td>
+					</tr>
+					<tr class="tbl_header">
 						<th>Number Purchased</th>
 						<th>Savings</th>
 						<th>Brand</th>
@@ -157,15 +171,11 @@ if(!empty($item)) { ?>
 						<th>Actions</th>
 					</tr>
 					<tr class="odd" data-i_id="<?=$item['id']; ?>">
-					<td><label></label><?=$item['name']; ?></label></td>
-					<td><input type="text" name="price" value="<?=$item['price']; ?>" placeholder="Price" style="width: 50%;"></td>
-					<td><input type="text" name="size" value="<?=$item['size']; ?>" placeholder="Size" style="width: 50%;">
-						<input type="text" name="size_unit" value="<?=$item['size_unit']; ?>" placeholder="Unit" style="width: 50%;"></td>
-					<td><input type="text" name="amount" value="<?=$item['amount']; ?>" placeholder="Amount Purchased" style="width: 50%;"></td>
-					<td><input type="text" name="savings" value="<?=$item['savings']; ?>" placeholder="Savings" style="width: 50%;"></td>
-					<td><input type="text" name="brand" value="<?=$item['brand']; ?>" placeholder="Brand" style="width: 93%;"></td>
-					<td><input id="datepicker1" type="date" name="time_stamp_purchased" value="<?=$time_stamp; ?>" style="width: 92%;"></td>
-					<td><input type="submit" name="delete" value="Delete"></td>
+						<td><input type="text" name="amount" value="<?=$item['amount']; ?>" placeholder="Amount Purchased" style="width: 50%;"></td>
+						<td><input type="text" name="savings" value="<?=$item['savings']; ?>" placeholder="Savings" style="width: 50%;"></td>
+						<td><input type="text" name="brand" value="<?=$item['brand']; ?>" placeholder="Brand" style="width: 93%;"></td>
+						<td><input id="datepicker1" type="date" name="time_stamp_purchased" value="<?=$time_stamp; ?>" style="width: 92%;"></td>
+						<td><input type="submit" name="delete" value="Delete"></td>
 					</tr>
 				</table>
 			</div>

@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 include 'opendb.php';
+require_once "link.php";
 include 'header.html'; 
 ?>
 
@@ -247,7 +248,7 @@ include 'header.html';
 	
   </script>
   
-  <div class="colmask" style="margin: auto;">
+  <div class="colmask" style="margin-left: 5%; margin-right: 5%;">
   	<form action="?submit" method="post">
 	    <div class="header">
 	    </div>
@@ -383,7 +384,7 @@ include 'header.html';
 </div>
 <div id="add-item" style="display: none; margin-left: 42%; margin-right: 58%; top: -240px;">
 <input type="button" id="close" value="X" />
-<iframe src="/add-item" style="width: 245px; height: 270px; border-radius: 20px; border: 2px solid #000;"></iframe>
+<iframe src="<?=$link_url; ?>/add-item" style="width: 245px; height: 270px; border-radius: 20px; border: 2px solid #000;"></iframe>
 </div>
 <?php
 include 'closedb.php';

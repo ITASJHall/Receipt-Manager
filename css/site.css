@@ -102,7 +102,8 @@ root{
    background-color: #b4caf7;
 }
 body {
-   padding: 0px;
+   padding-left: 5%;
+   padding-right: 5%;
    margin: 0px;
    font-size: 90%;
    background-color: #e7e7de;

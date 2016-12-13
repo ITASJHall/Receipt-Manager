@@ -52,6 +52,8 @@ if (isset($_POST['edit'])) {
 
 			$item_query = "UPDATE `_items_purchased` SET ";
 			$item_query .= !empty($item['price']) ?				   "`cost_per_unit` = '" . 		  $conn -> real_escape_string(htmlentities($item['price'])) . "', " : '';
+			$item_query .= !empty($item['cate']) ?				   "`category` = '" . 		  $conn -> real_escape_string(htmlentities($item['cate'])) . "', " : '';
+			$item_query .= !empty($item['type']) ?				   "`type` = '" . 		  $conn -> real_escape_string(htmlentities($item['type'])) . "', " : '';
 			$item_query .= !empty($item['size']) ?				   "`size` = '" . 				  $conn -> real_escape_string(htmlentities($item['size'])) . "', " : '';
 			$item_query .= !empty($item['size_unit']) ?			   "`size_unit` = '" . 			  $conn -> real_escape_string(htmlentities($item['size_unit'])) . "', " : '';
 			$item_query .= !empty($item['amount']) ? 		  	   "`amount` = '" . 			  $conn -> real_escape_string(htmlentities($item['amount'])) . "', " : '';
@@ -110,7 +112,7 @@ if (!empty($entry_id)) {
 	$entrys = $result->fetch_assoc();
 	
 	$query = "SELECT ";
-	$query .= "`_items_purchased`.`id`, `_items_purchased`.`receipt_id`,`_items`.`name`, `_items_purchased`.`cost_per_unit` as `price`, `_items_purchased`.`size`, `_items_purchased`.`size_unit`, `_items_purchased`.`amount`, `_items_purchased`.`savings`, `_items_purchased`.`brand`, `_items_purchased`.`time_stamp_purchased` ";
+	$query .= "`_items_purchased`.`id`, `_items_purchased`.`receipt_id`,`_items`.`name`, `_items_purchased`.`cost_per_unit` as `price`, `_items_purchased`.`size`, `_items_purchased`.`category`, `_items_purchased`.`type`, `_items_purchased`.`size_unit`, `_items_purchased`.`amount`, `_items_purchased`.`savings`, `_items_purchased`.`brand`, `_items_purchased`.`time_stamp_purchased` ";
 	$query .= "FROM `_items_purchased` INNER JOIN ";
 	$query .= "`_items` ON `_items_purchased`.`item_id` = `_items`.`id` ";
 	$query .= "WHERE `receipt_id` = " . $entry_id . ";";	
@@ -146,6 +148,7 @@ if (!empty($entry_id)) {
                     var status = xhr.status;
 					if(status == 200){
                         $this.closest('tr').addClass('strikeout');
+                        $this.closest('tr').prev('tr').prev('tr').addClass('strikeout');
 					} else {
 
 					}
@@ -229,21 +232,19 @@ if (!empty($entry_id)) {
 		</div>
 		<div>
 			<table border="0" style="margin: 0 auto;" id="receipt-items">
-				<tr class="tbl_header">
-					<th>Item Name</th>
-					<th>Price</th>
-					<th>Size</th>
-					<th>Number Purchased</th>
-					<th>Savings</th>
-					<th>Brand</th>
-					<th>Date Purchased</th>
-					<th>Action</th>
-				</tr>
 				<?php
 		
 				$stripe = false;
 				foreach ($items as $item) {
-					// Shade every 2nd line
+					// Shade every 2nd line ?>
+					<tr class="tbl_header">
+						<th>Item Name</th>
+						<th>Price</th>
+						<th>Category</th>
+						<th>Type</th>
+						<th>Size</th>
+					</tr>
+					<?php
 					$stripe = !$stripe;
 					$time_stamp = date('Y-m-d', strtotime(str_replace('-', '/', htmlentities($item['time_stamp_purchased']))));
 					if ($stripe) { ?>
@@ -252,17 +253,35 @@ if (!empty($entry_id)) {
 						<tr class="even" data-i_id="<?=$item['id']; ?>">
 					<?php } ?>
 		
-					<td><label></label><?=$item['name']; ?></label></td>
-					<td><input type="text" name="price-<?=$item['id']; ?>" value="<?=$item['price']; ?>" placeholder="Price" style="width: 50%;"></td>
-					<td><input type="text" name="size-<?=$item['id']; ?>" value="<?=$item['size']; ?>" placeholder="Size" style="width: 50%;">
-                        <input type="text" name="size_unit-<?=$item['id']; ?>" value="<?=$item['size_unit']; ?>" placeholder="Unit" style="width: 50%;"></td>
-					<td><input type="text" name="amount-<?=$item['id']; ?>" value="<?=$item['amount']; ?>" placeholder="Amount Purchased" style="width: 50%;"></td>
-					<td><input type="text" name="savings-<?=$item['id']; ?>" value="<?=$item['savings']; ?>" placeholder="Savings" style="width: 50%;"></td>
-					<td><input type="text" name="brand-<?=$item['id']; ?>" value="<?=$item['brand']; ?>" placeholder="Brand" style="width: 93%;"></td>
-					<td><input type="date" name="time_stamp_purchased-<?=$item['id']; ?>" value="<?=$time_stamp; ?>" style="width: 92%;"></td>
-					<td><input type="button" name="delete" value="Delete" data-id="<?=$item['receipt_id']; ?>"></td>					
+						<td><label></label><?=$item['name']; ?></label></td>
+						<td><input type="text" name="price-<?=$item['id']; ?>" value="<?=$item['price']; ?>" placeholder="Price" style="width: 50%;"></td>
+						<td><input type="text" name="cate-<?=$item['id']; ?>" value="<?=$item['category']; ?>" placeholder="Category" style="width: 50%;"></td>
+						<td><input type="text" name="type-<?=$item['id']; ?>" value="<?=$item['type']; ?>" placeholder="Type" style="width: 50%;"></td>
+						<td><input type="text" name="size-<?=$item['id']; ?>" value="<?=$item['size']; ?>" placeholder="Size" style="width: 50%;">
+							<input type="text" name="size_unit-<?=$item['id']; ?>" value="<?=$item['size_unit']; ?>" placeholder="Unit" style="width: 50%;"></td>
 					</tr>
-					
+					<tr class="tbl_header">
+						<th>Number Purchased</th>
+						<th>Savings</th>
+						<th>Brand</th>
+						<th>Date Purchased</th>
+						<th>Action</th>
+					</tr>
+					<?php if ($stripe) { ?>
+						<tr class="odd" data-i_id="<?=$item['id']; ?>">
+					<?php } else { ?>
+						<tr class="even" data-i_id="<?=$item['id']; ?>">
+					<?php } ?>
+						<td><input type="text" name="amount-<?=$item['id']; ?>" value="<?=$item['amount']; ?>" placeholder="Amount Purchased" style="width: 50%;"></td>
+						<td><input type="text" name="savings-<?=$item['id']; ?>" value="<?=$item['savings']; ?>" placeholder="Savings" style="width: 50%;"></td>
+						<td><input type="text" name="brand-<?=$item['id']; ?>" value="<?=$item['brand']; ?>" placeholder="Brand" style="width: 93%;"></td>
+						<td><input type="date" name="time_stamp_purchased-<?=$item['id']; ?>" value="<?=$time_stamp; ?>" style="width: 92%;"></td>
+						<td><input type="button" name="delete" value="Delete" data-id="<?=$item['receipt_id']; ?>"></td>
+					</tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+
 			<?php } ?>
 			</table>
 		</div>
