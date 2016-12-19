@@ -56,7 +56,7 @@ if (isset($_POST['edit'])) {
 
 	$item_query = "UPDATE `_items_purchased` SET ";
 	$item_query .= !empty($_POST['price']) ?				   "`cost_per_unit` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['price'])) . "', " : '';
-	$item_query .= !empty($_POST['cate']) ?				   "`category` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['cate'])) . "', " : '';
+	$item_query .= !empty($_POST['category']) ?				   "`category` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['category'])) . "', " : '';
 	$item_query .= !empty($_POST['type']) ?				   "`type` = '" . 		  $conn -> real_escape_string(htmlentities($_POST['type'])) . "', " : '';
 	$item_query .= !empty($_POST['size']) ?				   "`size` = '" . 				  $conn -> real_escape_string(htmlentities($_POST['size'])) . "', " : '';
 	$item_query .= !empty($_POST['size_unit']) ?			   "`size_unit` = '" . 			  $conn -> real_escape_string(htmlentities($_POST['size_unit'])) . "', " : '';

@@ -28,6 +28,7 @@ if (isset($_POST['edit'])) {
 	$query .= !empty($_POST['time_purchased']) ? "`time_purchased`        = '" . $conn -> real_escape_string($timepurchased) . "', " : '';
 	$query .= !empty($_POST['purchaser']) ? "`purchaser`        = '" . $conn -> real_escape_string(htmlentities($_POST['purchaser'])) . "', " : '';
 	$query .= !empty($_POST['method_of_payment']) ? "`method_of_payment`        = '" . $conn -> real_escape_string(htmlentities($_POST['method_of_payment'])) . "', " : '';
+	$query .= !empty($_POST['transaction_id']) ? "`tr_id`        = '" . $conn -> real_escape_string(htmlentities($_POST['transaction_id'])) . "', " : '';
 	$query .= "`time_stamp_updated` = NOW() ";
 	$query .= " WHERE `_receipts`.`id` = " . $entry_id . ";";
 
@@ -35,7 +36,7 @@ if (isset($_POST['edit'])) {
 		$successes[] = "Receipt Updated Successfully";
 
         unset($_POST['edit']);
-        $add_array = array('location', 'cost', 'cost_before_tax', 'pst', 'gst', 'method_of_payment', 'points_spent', 'receipt_type', 'points_earned', 'savings_total', 'cashier', 'purchaser', 'time_purchased', 'num_items');
+        $add_array = array('location', 'cost', 'cost_before_tax', 'pst', 'gst', 'method_of_payment', 'points_spent', 'receipt_type', 'points_earned', 'savings_total', 'cashier', 'purchaser', 'time_purchased', 'num_items', 'transaction_id');
         foreach($_POST as $key=>$value){
             if(in_array($key, $add_array)){
                 unset($_POST[$key]);

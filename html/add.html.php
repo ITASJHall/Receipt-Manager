@@ -7,38 +7,43 @@
                 <div class="col1">
                     <fieldset>
                         <label>Date of Purchased:</label><br/>
-                        <input id="datepicker" type="date" name="time_purchased" required>
+                        <input id="datepicker" type="date" name="time_purchased"  value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>" required>
                     </fieldset>
 
                     <fieldset>
                         <label>Subtotal:</label><br/>
-                        <input type="text" name="cost_before_tax">
+                        <input type="text" name="cost_before_tax" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>PST:</label><br/>
-                        <input type="text" name="pst">
+                        <input type="text" name="pst" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>Points Spent:</label><br/>
-                        <input type="text" name="points_spent">
+                        <input type="text" name="points_spent" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>Savings Total:</label><br/>
-                        <input type="text" name="savings_total">
+                        <input type="text" name="savings_total" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Cashier:</label><br/>
+                        <input type="text" name="cashier" style="width: 97%;" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
                 </div>
                 <div class="col2">
                     <fieldset>
                         <label>Location:</label><br/>
-                        <input type="text" name="location" required style="width: 97%;">
+                        <input type="text" name="location" required style="width: 97%;" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>Type:</label><br/>
-                        <input type="text" name="receipt_type" required style="width: 97%;">
+                        <input type="text" name="receipt_type" required style="width: 97%;" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
@@ -52,41 +57,42 @@
                     <fieldset style="border-style:solid;">
                         <table class="item-list" id="item-list"></table>
                     </fieldset>
-
-                    <fieldset class="colw2">
-                        <label>Cashier:</label><br/>
-                        <input type="text" name="cashier" style="width: 97%;">
-                    </fieldset>
                 </div>
                 <div class="col3">
                     <fieldset>
                         <label>Purchaser:</label><br/>
-                        <input type="text" name="purchaser" required>
+                        <input type="text" name="purchaser" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>" required>
                     </fieldset>
 
                     <fieldset>
                         <label>Cost:</label><br/>
-                        <input type="text" name="cost" required>
+                        <input type="text" name="cost" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>" required>
                     </fieldset>
 
                     <fieldset>
                         <label>GST:</label><br/>
-                        <input type="text" name="gst">
+                        <input type="text" name="gst" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>Points Earned:</label><br/>
-                        <input type="text" name="points_earned">
+                        <input type="text" name="points_earned" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>">
                     </fieldset>
 
                     <fieldset>
                         <label>Method of Payment:</label><br/>
+                        <?php $_POST['method_of_payment'] = (!empty($_POST['method_of_payment'])? $_POST['method_of_payment'] : ''); ?>
                         <select name="method_of_payment" style="width: 100%;">
-                            <option value="Credit">Credit</option>
-                            <option value="Debit">Debit</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Other">Other</option>
+                            <option value="Credit" <?=($_POST['method_of_payment'] == 'Credit')? 'checked' : ''; ?>>Credit</option>
+                            <option value="Debit" <?=($_POST['method_of_payment'] == 'Debit')? 'checked' : ''; ?>>Debit</option>
+                            <option value="Cash" <?=($_POST['method_of_payment'] == 'Cash')? 'checked' : ''; ?>>Cash</option>
+                            <option value="Other" <?=($_POST['method_of_payment'] == 'Other')? 'checked' : ''; ?>>Other</option>
                         </select>
+                    </fieldset>
+
+                    <fieldset>
+                        <label>Transaction ID:</label><br/>
+                        <input type="text" name="transaction_id" value="<?=(!empty($_POST['time_purchased'])? $_POST['time_purchased'] : ''); ?>" required>
                     </fieldset>
                 </div>
             </div>

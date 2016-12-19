@@ -84,19 +84,6 @@ if (isset($_POST['add'])){
 				<?php $row = !$row; ?>
 			<?php } ?>
 
-			<?php foreach($entrys as $entry) { ?>
-				<?php if($row) echo '<tr>'; ?>
-					<td><input type="checkbox" name="<?=$entry['name'];?>" value="<?=$entry['name'];?>"><label><?=$entry['name'];?></label></td>
-				<?php if(!$row) echo '</tr>'; ?>
-				<?php $row = !$row; ?>
-			<?php } ?>
-
-			<?php foreach($entrys as $entry) { ?>
-				<?php if($row) echo '<tr>'; ?>
-					<td><input type="checkbox" name="<?=$entry['name'];?>" value="<?=$entry['name'];?>"><label><?=$entry['name'];?></label></td>
-				<?php if(!$row) echo '</tr>'; ?>
-				<?php $row = !$row; ?>
-			<?php } ?>
 		</table>
 		<input type="submit" name="addItem" value="Add to List"  />
 	</form>

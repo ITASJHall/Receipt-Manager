@@ -10,7 +10,7 @@
             <table border="0" style="margin: 0 auto;">
                 <tr class="tbl_header">
                     <th>Location Purchased</th>
-                    <th>Item Purchesed</th>
+                    <th>Transaction ID</th>
                     <th>Subtotal</th>
                     <th>PST</th>
                 </tr>
@@ -19,7 +19,7 @@
                         <input type="text" name="location" value="<?=$entrys['location']; ?>" >
                     </td>
                     <td>
-                        <input type="text" name="num_items" value="<?=$entrys['num_items']; ?>" >
+                        <input type="text" name="transaction_id" value="<?=$entrys['tr_id']; ?>" >
                     </td>
                     <td>
                         <input type="text" name="cost_before_tax" value="<?=$entrys['cost_before_tax']; ?>" >
