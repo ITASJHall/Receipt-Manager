@@ -75,13 +75,35 @@ if($by_avg_cost_query){
     $stats[] = array('title' => 'Average Cost of Items', 'stats' => $by_avg_cost, 'formatter' => '$');
 }
 //By Item Count stats
-$by_item_count_query = mysqli_query($conn, "SELECT COUNT(*) as `total`, `name`  FROM  `_items_purchased` INNER JOIN `_items` ON `_items_purchased`.`item_id` = `_items`.`id` GROUP BY `item_id`");
+$by_item_count_query = mysqli_query($conn, "SELECT COUNT(*)*`amount` as `total`, `name`  FROM  `_items_purchased` INNER JOIN `_items` ON `_items_purchased`.`item_id` = `_items`.`id` GROUP BY `item_id`");
 if($by_item_count_query){
     $by_item_count = array();
     while($item_count = $by_item_count_query->fetch_assoc()){
-        $by_item_count[] = array('title' => $item_count['name'], 'stat' => $item_count['total']);
+        if($item_count['name'] == 'Gas'){
+            $by_item_count[] = array('title' => $item_count['name'], 'stat' => $item_count['total'] . " L");
+        } else {
+            $by_item_count[] = array('title' => $item_count['name'], 'stat' => $item_count['total']);
+        }
     }
     $stats[] = array('title' => 'How many Items Purchased', 'stats' => $by_item_count, 'formatter' => '');
+}
+//By Location frequency stats
+$by_location_frequency_query = mysqli_query($conn, "SELECT IFNULL(TIMESTAMPDIFF(DAY, MIN(`time_purchased`), MAX(`time_purchased`)) / NULLIF(COUNT(DISTINCT `time_purchased`) - 1,0),0) as `frequency`, `location` FROM  `_receipts` GROUP BY `location`");
+if($by_location_frequency_query){
+    $by_location_frequency = array();
+    while($location_frequency = $by_location_frequency_query->fetch_assoc()){
+        $by_location_frequency[] = array('title' => $location_frequency['location'], 'stat' => round($location_frequency['frequency'],2));
+    }
+    $stats[] = array('title' => 'Frequency of Location Visits', 'stats' => $by_location_frequency, 'formatter' => 'Days');
+}
+//By Cheapest Location stats
+$by_location_cheap_query = mysqli_query($conn, "SELECT MIN(`cost_per_unit`) as `cost`, `size`, `size_unit` , `location`, `name` FROM `_items_purchased`,`_receipts`, `_items` WHERE `_items_purchased`.`item_id` = `_items`.`id` AND `_items_purchased`.`receipt_id` = `_receipts`.`id` GROUP BY `item_id`");
+if($by_location_cheap_query){
+    $by_location_cheap = array();
+    while($location_cheap = $by_location_cheap_query->fetch_assoc()){
+        $by_location_cheap[] = array('title' => $location_cheap['name'], 'stat' => $location_cheap['location'] . " At $" . round($location_cheap['cost'],2) . " per " . $location_cheap['size'].$location_cheap['size_unit']);
+    }
+    $stats[] = array('title' => 'Cheapest Location for Item', 'stats' => $by_location_cheap, 'formatter' => '');
 }
 
 

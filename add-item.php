@@ -15,13 +15,13 @@ include 'opendb.php';
 
 
 if (isset($_POST['add'])){
-	
+	$_POST['item_new'] = str_replace(" ", "-",$_POST['item_new']);
 	$result = mysqli_query($conn,"SELECT `name` FROM  `_items` WHERE `name` = '" . $_POST['item_new'] . "' LIMIT 1");	
 	if($result){
 		$row = $result->fetch_assoc();					
 	}
-	
-	 if(empty($row)){  
+
+	 if(empty($row)){
 		 $query = "INSERT INTO `_items` SET ";     
 	     $query .= "`name`        = '" .  $conn->real_escape_string(htmlentities($_POST['item_new'])) . "', ";   
 	     $query .= "`number_purchased`     = '0', ";
@@ -46,7 +46,7 @@ if (isset($_POST['add'])){
 	}
  }
 
-	$result = mysqli_query($conn,"SELECT * FROM  `_items`");	
+	$result = mysqli_query($conn,"SELECT * FROM  `_items` ORDER BY `name`");
 	if($result){
 		$rows = array();
 		while($row = $result->fetch_assoc()) {
