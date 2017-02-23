@@ -1,5 +1,5 @@
 <div class="colmask" style="margin-left: 5%; margin-right: 5%;">
-    <form action="?view" method="post">
+    <div class="stats-slider">
         <?php $count = 0; ?>
         <?php foreach($stats as $stat_array){ ?>
             <?php $count++; ?>
@@ -18,10 +18,6 @@
                 <?php } ?>
                 </fieldset>
             </fieldset>
-            <?php if($count == 3){ ?>
-                <br style="clear: left;"/>
-                <?php $count = 0; ?>
-            <?php } ?>
         <?php } ?>
-    </form>
+    </div>
 </div>

@@ -7,7 +7,21 @@ include 'header.html';
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+<script type="text/javascript">
+   $(document).ready(function(){
+      $('.stats-slider').slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          arrows: true,
+          dots:true
+      });
+   });
+</script>
+
 
 <?php
 $stats = array();
@@ -107,7 +121,7 @@ if($by_location_cheap_query){
 }
 
 
-include('html/statictics.html.php');
+include('html/statistics.html.php');
 include  'closedb.php';
 include  'footer.html';
 ?>
